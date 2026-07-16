@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils/cn';
-import { GraduationCap, Mail, Phone, MapPin } from 'lucide-react';
+import { GraduationCap, Mail, Phone, MapPin, Send, MessageCircle, Instagram } from 'lucide-react';
 
 // ============================================================
 // Footer component
@@ -11,11 +11,10 @@ const footerLinks = {
   academy: {
     title: 'Академия',
     links: [
-      { label: 'О нас', href: '/about' },
-      { label: 'Курсы', href: '/courses' },
-      { label: 'Преподаватели', href: '/teachers' },
-      { label: 'Отзывы', href: '/reviews' },
-      { label: 'Блог', href: '/blog' },
+      { label: 'О нас', href: '/' },
+      { label: 'Курсы', href: '/#courses' },
+      { label: 'Кабинеты', href: '/classrooms' },
+      { label: 'Контакты', href: '/contact' },
     ],
   },
   support: {
@@ -31,10 +30,10 @@ const footerLinks = {
 } as const;
 
 const socialLinks = [
-  { label: 'Telegram', href: 'https://t.me/unicornacademy' },
-  { label: 'YouTube', href: 'https://youtube.com/@unicornacademy' },
-  { label: 'Instagram', href: 'https://instagram.com/unicornacademy' },
-  { label: 'VK', href: 'https://vk.com/unicornacademy' },
+  { label: 'Telegram', href: 'https://t.me/Nu_wwx', icon: Send },
+  { label: 'WhatsApp', href: 'https://wa.me/77000000000', icon: MessageCircle },
+  { label: 'Instagram', href: '#', icon: Instagram },
+  { label: 'Email', href: 'mailto:hello@unicorn-academy.kz', icon: Mail },
 ];
 
 export function Footer() {
@@ -93,7 +92,7 @@ export function Footer() {
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-indigo-500 shrink-0 mt-0.5" />
                 <span>
-                  г. Москва, ул. Образования, д. 42
+                  Онлайн по всему Казахстану
                 </span>
               </div>
             </div>
@@ -126,24 +125,28 @@ export function Footer() {
               Мы в соцсетях
             </h3>
             <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium',
-                    'bg-indigo-600/5 text-gray-700 dark:text-gray-300',
-                    'hover:bg-indigo-600/15 hover:text-indigo-600 dark:hover:text-indigo-400',
-                    'border border-indigo-600/10 dark:border-indigo-800/30',
-                    'transition-all duration-200',
-                  )}
-                  aria-label={social.label}
-                >
-                  {social.label}
-                </a>
-              ))}
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium',
+                      'bg-indigo-600/5 text-gray-700 dark:text-gray-300',
+                      'hover:bg-indigo-600/15 hover:text-indigo-600 dark:hover:text-indigo-400',
+                      'border border-indigo-600/10 dark:border-indigo-800/30',
+                      'transition-all duration-200',
+                    )}
+                    aria-label={social.label}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {social.label}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

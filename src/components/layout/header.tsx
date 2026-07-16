@@ -20,9 +20,9 @@ import {
 // ============================================================
 
 const navLinks = [
-  { href: '/courses', label: 'Курсы' },
-  { href: '/teachers', label: 'Преподаватели' },
-  { href: '/about', label: 'О нас' },
+  { href: '/', label: 'Главная' },
+  { href: '/classrooms', label: 'Кабинеты' },
+  { href: '/#courses', label: 'Курсы' },
   { href: '/contact', label: 'Контакты' },
 ] as const;
 
