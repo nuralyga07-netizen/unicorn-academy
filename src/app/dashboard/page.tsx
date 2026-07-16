@@ -1,0 +1,684 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import {
+  BookOpen,
+  ClipboardList,
+  User,
+  Calendar,
+  BarChart3,
+  Award,
+  Bell,
+  ChevronRight,
+  GraduationCap,
+  CheckCircle2,
+  Clock,
+  TrendingUp,
+  FileText,
+  Video,
+  Menu,
+  X,
+  LogOut,
+  Star,
+  Play,
+  MessageCircle,
+} from "lucide-react";
+
+const TELEGRAM_LINK =
+  "https://t.me/Nu_wwx?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20the%20courses%20at%20Unicorn%20Academy.";
+
+// ---------- Tab configuration ----------
+
+interface DashboardTab {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+}
+
+const tabs: DashboardTab[] = [
+  { id: "courses", label: "Мои курсы", icon: BookOpen },
+  { id: "homework", label: "Домашнее задание", icon: ClipboardList },
+  { id: "profile", label: "Кабинет", icon: User },
+  { id: "schedule", label: "Расписание", icon: Calendar },
+  { id: "attendance", label: "Посещаемость", icon: BarChart3 },
+  { id: "progress", label: "Прогресс", icon: TrendingUp },
+  { id: "certificates", label: "Сертификаты", icon: Award },
+  { id: "announcements", label: "Объявления", icon: Bell },
+];
+
+// ---------- Mock data ----------
+
+const myCourses = [
+  {
+    name: "Общий английский A2",
+    teacher: "Айгерим Нурланова",
+    progress: 72,
+    nextLesson: "Unit 8: Present Perfect",
+    nextDate: "Сегодня, 10:00",
+    grade: "A-",
+    color: "from-indigo-500 to-blue-600",
+  },
+  {
+    name: "Разговорный клуб B1+",
+    teacher: "Michael Johnson",
+    progress: 45,
+    nextLesson: "Topic: Travel",
+    nextDate: "Сб, 11:00",
+    grade: "B+",
+    color: "from-emerald-500 to-teal-600",
+  },
+  {
+    name: "IELTS Preparation",
+    teacher: "Michael Johnson",
+    progress: 30,
+    nextLesson: "Writing Task 2",
+    nextDate: "Вт, 14:00",
+    grade: "-",
+    color: "from-amber-500 to-orange-600",
+  },
+];
+
+const homeworkItems = [
+  {
+    id: "1",
+    title: "Unit 8: Present Perfect Exercises",
+    course: "Общий английский A2",
+    dueDate: "Завтра, 23:59",
+    status: "pending",
+    description: "Выполнить упражнения 1-15 на стр. 42-45",
+  },
+  {
+    id: "2",
+    title: "IELTS Writing Task 2 Essay",
+    course: "IELTS Preparation",
+    dueDate: "Пт, 18:00",
+    status: "in_progress",
+    description: "Написать эссе на тему 'Education' (250-300 слов)",
+  },
+  {
+    id: "3",
+    title: "Vocabulary Unit 5-6 Review",
+    course: "Общий английский A2",
+    dueDate: "Ср, 23:59",
+    status: "completed",
+    description: "Повторить слова из Unit 5-6, подготовиться к тесту",
+  },
+  {
+    id: "4",
+    title: "Speaking Practice: Travel Vocabulary",
+    course: "Разговорный клуб B1+",
+    dueDate: "Сб, 10:00",
+    status: "pending",
+    description: "Подготовить монолог на тему 'My last trip' (2 минуты)",
+  },
+];
+
+const scheduleEvents = [
+  { day: "Пн", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Айгерим Н.", room: "Google Meet" },
+  { day: "Вт", time: "14:00 – 16:00", course: "IELTS Preparation", teacher: "Michael J.", room: "Google Meet" },
+  { day: "Ср", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Айгерим Н.", room: "Google Meet" },
+  { day: "Пт", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Айгерим Н.", room: "Google Meet" },
+  { day: "Сб", time: "11:00 – 12:30", course: "Разговорный клуб B1+", teacher: "Michael J.", room: "Google Meet" },
+];
+
+const attendanceData = [
+  { month: "Сентябрь", attended: 12, total: 16, percent: 75 },
+  { month: "Октябрь", attended: 14, total: 16, percent: 88 },
+  { month: "Ноябрь", attended: 10, total: 12, percent: 83 },
+  { month: "Декабрь", attended: 0, total: 16, percent: 0 },
+];
+
+const announcements = [
+  {
+    id: "1",
+    title: "Новогодняя скидка 20%!",
+    date: "15 декабря",
+    text: "До конца декабря действует скидка 20% на все курсы при оплате полного месяца.",
+    type: "promo",
+  },
+  {
+    id: "2",
+    title: "Отмена занятий 31 декабря",
+    date: "10 декабря",
+    text: "Занятия 31 декабря и 1 января отменяются. Расписание вернётся к обычному графику со 2 января.",
+    type: "info",
+  },
+  {
+    id: "3",
+    title: "Новый разговорный клуб",
+    date: "5 декабря",
+    text: "Открываем новый разговорный клуб по субботам в 15:00. Ведущий — Michael Johnson.",
+    type: "info",
+  },
+];
+
+// ---------- Tab content components ----------
+
+function CoursesTab() {
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Мои курсы</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {myCourses.map((course, i) => (
+          <motion.div
+            key={course.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="group relative rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-xl shadow-black/5 dark:shadow-black/10 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 overflow-hidden"
+          >
+            {/* Gradient header */}
+            <div className={`bg-gradient-to-r ${course.color} p-5 text-white`}>
+              <div className="flex items-center justify-between mb-2">
+                <GraduationCap className="w-6 h-6 opacity-80" />
+                <span className="text-xs bg-white/20 rounded-lg px-2.5 py-1 font-medium">
+                  {course.grade}
+                </span>
+              </div>
+              <h3 className="text-lg font-bold">{course.name}</h3>
+              <p className="text-sm opacity-80 mt-1">{course.teacher}</p>
+            </div>
+
+            {/* Progress */}
+            <div className="p-5 space-y-4">
+              <div>
+                <div className="flex items-center justify-between text-sm mb-1.5">
+                  <span className="text-muted-foreground">Прогресс</span>
+                  <span className="font-semibold">{course.progress}%</span>
+                </div>
+                <div className="w-full h-2 rounded-full bg-indigo-500/10 dark:bg-indigo-500/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${course.progress}%` }}
+                    transition={{ duration: 1, delay: i * 0.2 }}
+                    className={`h-full rounded-full bg-gradient-to-r ${course.color}`}
+                  />
+                </div>
+              </div>
+
+              <div className="text-sm text-muted-foreground space-y-1">
+                <div className="flex items-center gap-2">
+                  <Play className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>{course.nextLesson}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>{course.nextDate}</span>
+                </div>
+              </div>
+
+              <a
+                href="/classrooms"
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 text-sm font-medium transition-all shadow-lg shadow-indigo-500/25"
+              >
+                <Video className="w-4 h-4" />
+                Перейти в кабинет
+              </a>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HomeworkTab() {
+  const statusIcon = (status: string) => {
+    switch (status) {
+      case "completed":
+        return <CheckCircle2 className="w-5 h-5 text-emerald-500" />;
+      case "in_progress":
+        return <Clock className="w-5 h-5 text-amber-500" />;
+      default:
+        return <Clock className="w-5 h-5 text-indigo-400" />;
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Домашнее задание</h2>
+      <div className="space-y-4">
+        {homeworkItems.map((hw, i) => (
+          <motion.div
+            key={hw.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg p-5 lg:p-6 hover:shadow-xl transition-all"
+          >
+            <div className="flex items-start gap-4">
+              <div className="mt-0.5">{statusIcon(hw.status)}</div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-semibold">{hw.title}</h3>
+                    <p className="text-sm text-muted-foreground">{hw.course}</p>
+                  </div>
+                  <span
+                    className={`shrink-0 text-xs px-3 py-1 rounded-full font-medium ${
+                      hw.status === "completed"
+                        ? "bg-emerald-500/10 text-emerald-500"
+                        : hw.status === "in_progress"
+                        ? "bg-amber-500/10 text-amber-500"
+                        : "bg-indigo-500/10 text-indigo-500"
+                    }`}
+                  >
+                    {hw.status === "completed"
+                      ? "Выполнено"
+                      : hw.status === "in_progress"
+                      ? "В процессе"
+                      : "Ожидает"}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">{hw.description}</p>
+                <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  Сдать до: {hw.dueDate}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProfileTab() {
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Личный кабинет</h2>
+      <div className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-xl p-8">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white font-bold text-3xl shadow-xl shadow-indigo-500/20">
+            А
+          </div>
+          <div className="text-center sm:text-left flex-1">
+            <h3 className="text-2xl font-bold">Азамат К.</h3>
+            <p className="text-muted-foreground">Ученик · Уровень A2</p>
+            <div className="flex flex-wrap gap-3 mt-4">
+              {[
+                { label: "Курсов", value: "3" },
+                { label: "Уроков", value: "36" },
+                { label: "Дней в академии", value: "94" },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="px-4 py-2 rounded-xl bg-indigo-500/5 dark:bg-indigo-500/5 text-center"
+                >
+                  <div className="font-bold text-lg">{s.value}</div>
+                  <div className="text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <a
+            href={TELEGRAM_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-sky-500 text-white hover:bg-sky-600 font-medium text-sm transition-all shadow-lg shadow-sky-500/25 shrink-0"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Связаться
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScheduleTab() {
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Расписание</h2>
+      <div className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-xl overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-indigo-500/10 bg-indigo-500/5">
+                <th className="text-left p-4 text-sm font-semibold text-muted-foreground">День</th>
+                <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Время</th>
+                <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Курс</th>
+                <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Преподаватель</th>
+                <th className="text-left p-4 text-sm font-semibold text-muted-foreground">Кабинет</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scheduleEvents.map((event, i) => (
+                <tr
+                  key={i}
+                  className="border-b border-indigo-500/5 hover:bg-indigo-500/5 transition-colors"
+                >
+                  <td className="p-4">
+                    <span className="font-semibold">{event.day}</span>
+                  </td>
+                  <td className="p-4 text-sm text-muted-foreground">{event.time}</td>
+                  <td className="p-4 text-sm font-medium">{event.course}</td>
+                  <td className="p-4 text-sm text-muted-foreground">{event.teacher}</td>
+                  <td className="p-4">
+                    <span className="text-xs px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-500 font-medium">
+                      {event.room}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AttendanceTab() {
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Посещаемость</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {attendanceData.map((month, i) => (
+          <motion.div
+            key={month.month}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg p-5 text-center"
+          >
+            <h3 className="font-semibold mb-3">{month.month}</h3>
+            <div className="relative w-24 h-24 mx-auto mb-3">
+              <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="8" className="text-indigo-500/10" />
+                <motion.circle
+                  cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeDasharray={`${2 * Math.PI * 40}`}
+                  initial={{ strokeDashoffset: 2 * Math.PI * 40 }}
+                  animate={{
+                    strokeDashoffset: 2 * Math.PI * 40 * (1 - month.percent / 100),
+                  }}
+                  transition={{ duration: 1, delay: i * 0.2 }}
+                  className={
+                    month.percent >= 80
+                      ? "text-emerald-500"
+                      : month.percent >= 60
+                      ? "text-amber-500"
+                      : "text-indigo-500"
+                  }
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-xl font-bold">{month.percent}%</span>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {month.attended}/{month.total} занятий
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProgressTab() {
+  const progressData = [
+    { label: "Грамматика", value: 68, color: "from-indigo-500 to-blue-500" },
+    { label: "Лексика", value: 55, color: "from-emerald-500 to-teal-500" },
+    { label: "Аудирование", value: 72, color: "from-amber-500 to-orange-500" },
+    { label: "Чтение", value: 80, color: "from-purple-500 to-violet-500" },
+    { label: "Письмо", value: 45, color: "from-pink-500 to-rose-500" },
+    { label: "Говорение", value: 60, color: "from-cyan-500 to-sky-500" },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Прогресс</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {progressData.map((item, i) => (
+          <motion.div
+            key={item.label}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg p-5"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-medium text-sm">{item.label}</span>
+              <span className="text-sm font-bold">{item.value}%</span>
+            </div>
+            <div className="w-full h-2.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/10 overflow-hidden">
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: `${item.value}%` }}
+                transition={{ duration: 1, delay: i * 0.1 }}
+                className={`h-full rounded-full bg-gradient-to-r ${item.color}`}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CertificatesTab() {
+  const certificates = [
+    { name: "Общий английский A1", date: "15.06.2025", grade: "A", status: "completed" },
+    { name: "Общий английский A2", date: "В процессе", grade: "-", status: "in_progress" },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Сертификаты</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {certificates.map((cert, i) => (
+          <motion.div
+            key={cert.name}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className={`rounded-2xl border p-6 backdrop-blur-xl shadow-lg transition-all ${
+              cert.status === "completed"
+                ? "border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-500/5"
+                : "border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30"
+            }`}
+          >
+            <Award
+              className={`w-12 h-12 mb-4 ${
+                cert.status === "completed" ? "text-emerald-500" : "text-muted-foreground/40"
+              }`}
+            />
+            <h3 className="font-semibold">{cert.name}</h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              {cert.status === "completed" ? `Выдан: ${cert.date}` : cert.date}
+            </p>
+            {cert.status === "completed" && (
+              <div className="flex items-center gap-2 mt-3">
+                <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 font-medium">
+                  Оценка: {cert.grade}
+                </span>
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AnnouncementsTab() {
+  const typeColors: Record<string, string> = {
+    promo: "bg-amber-500/10 text-amber-500 border-amber-500/20",
+    info: "bg-indigo-500/10 text-indigo-500 border-indigo-500/20",
+  };
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Объявления</h2>
+      <div className="space-y-4">
+        {announcements.map((ann, i) => (
+          <motion.div
+            key={ann.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg p-5 lg:p-6 hover:shadow-xl transition-all"
+          >
+            <div className="flex items-start gap-4">
+              <Bell className="w-5 h-5 text-indigo-500 mt-0.5 shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <h3 className="font-semibold">{ann.title}</h3>
+                  <span
+                    className={`shrink-0 text-[10px] px-2.5 py-1 rounded-full font-medium border ${
+                      typeColors[ann.type]
+                    }`}
+                  >
+                    {ann.type === "promo" ? "Акция" : "Инфо"}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground">{ann.text}</p>
+                <p className="text-xs text-muted-foreground mt-2">{ann.date}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------- Tab content map ----------
+
+const tabContent: Record<string, React.ReactNode> = {
+  courses: <CoursesTab />,
+  homework: <HomeworkTab />,
+  profile: <ProfileTab />,
+  schedule: <ScheduleTab />,
+  attendance: <AttendanceTab />,
+  progress: <ProgressTab />,
+  certificates: <CertificatesTab />,
+  announcements: <AnnouncementsTab />,
+};
+
+// ---------- Main component ----------
+
+export default function StudentDashboard() {
+  const [activeTab, setActiveTab] = useState("courses");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50/50 via-white to-emerald-50/30 dark:from-[#0a0a1a] dark:via-indigo-950/20 dark:to-[#0a0a1a]">
+      {/* Sidebar */}
+      <aside
+        className={`fixed left-0 top-0 bottom-0 w-64 lg:w-72 z-50 bg-white/80 dark:bg-[#0a0a1a]/95 backdrop-blur-2xl border-r border-indigo-500/10 transition-transform duration-300 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div className="p-6 border-b border-indigo-500/10">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+              <span className="text-white font-bold text-sm">U</span>
+            </div>
+            <span className="font-semibold">
+              Unicorn
+              <span className="text-indigo-600 dark:text-indigo-400 ml-1">Academy</span>
+            </span>
+          </Link>
+        </div>
+
+        <nav className="p-4 space-y-1">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  setSidebarOpen(false);
+                }}
+                className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium transition-all text-left ${
+                  isActive
+                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20"
+                    : "text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-500/5"
+                }`}
+              >
+                <tab.icon className="w-4 h-4" />
+                <span>{tab.label}</span>
+                {isActive && <ChevronRight className="w-3.5 h-3.5 ml-auto opacity-60" />}
+              </button>
+            );
+          })}
+
+          <div className="pt-4 mt-4 border-t border-indigo-500/10">
+            <Link
+              href="/"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Выйти</span>
+            </Link>
+          </div>
+        </nav>
+      </aside>
+
+      {/* Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Main content */}
+      <div className="lg:ml-72 min-h-screen">
+        {/* Top bar */}
+        <header className="sticky top-0 z-30 bg-white/70 dark:bg-[#0a0a1a]/70 backdrop-blur-2xl border-b border-indigo-500/10">
+          <div className="flex items-center justify-between px-4 lg:px-8 h-16">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden w-10 h-10 rounded-xl hover:bg-indigo-500/10 flex items-center justify-center text-muted-foreground"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+
+            <h1 className="text-lg font-semibold hidden sm:block">
+              {tabs.find((t) => t.id === activeTab)?.label || "Кабинет"}
+            </h1>
+
+            <div className="flex items-center gap-3">
+              <a
+                href={TELEGRAM_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-500/10 text-sky-500 hover:bg-sky-500/20 text-sm font-medium transition-all"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Поддержка
+              </a>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/20">
+                А
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Tab content */}
+        <main className="p-4 lg:p-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              {tabContent[activeTab] || <CoursesTab />}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+      </div>
+    </div>
+  );
+}

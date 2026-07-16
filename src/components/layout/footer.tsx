@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils/cn';
-import { GraduationCap, Mail, Phone, MapPin, Send, MessageCircle, Instagram } from 'lucide-react';
+import { GraduationCap, Mail, Phone, MapPin, Send, MessageCircle, Globe } from 'lucide-react';
 
 // ============================================================
 // Footer component
@@ -32,7 +32,7 @@ const footerLinks = {
 const socialLinks = [
   { label: 'Telegram', href: 'https://t.me/Nu_wwx', icon: Send },
   { label: 'WhatsApp', href: 'https://wa.me/77000000000', icon: MessageCircle },
-  { label: 'Instagram', href: '#', icon: Instagram },
+  { label: 'Instagram', href: '#', icon: Globe },
   { label: 'Email', href: 'mailto:hello@unicorn-academy.kz', icon: Mail },
 ];
 
