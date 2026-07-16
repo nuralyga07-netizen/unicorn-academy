@@ -6,14 +6,11 @@ import {
   MapPin,
   Clock,
   Mail,
-  Phone,
   Send,
   MessageCircle,
   Image,
   Globe,
   ChevronRight,
-  ArrowRight,
-  Check,
 } from "lucide-react";
 
 const TELEGRAM_LINK =
