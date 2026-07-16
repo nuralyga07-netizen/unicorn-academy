@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import PricingSection from "@/components/sections/pricing";
 import {
   ArrowRight,
@@ -14,7 +13,6 @@ import {
   ChevronRight,
   Target,
   Award,
-  BookMarked,
   UsersRound,
   Monitor,
   FileCheck,
@@ -23,10 +21,9 @@ import {
   Clock,
   BarChart3,
   Send,
-  Instagram,
+  Image,
   Mail,
   MapPin,
-  Headphones,
   Quote,
 } from "lucide-react";
 
@@ -619,7 +616,7 @@ export default function HomePage() {
               className="group rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:shadow-pink-500/10 transition-all duration-300 p-6 flex items-center gap-4 hover:bg-pink-500/5"
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <Instagram className="w-7 h-7 text-white" />
+                <Image className="w-7 h-7 text-white" />
               </div>
               <div>
                 <h3 className="font-semibold">Instagram</h3>

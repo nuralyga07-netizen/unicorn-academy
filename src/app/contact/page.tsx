@@ -9,7 +9,7 @@ import {
   Phone,
   Send,
   MessageCircle,
-  Instagram,
+  Image,
   Globe,
   ChevronRight,
   ArrowRight,
@@ -37,7 +37,7 @@ const contactInfo = [
     gradient: "from-emerald-500 to-green-600",
   },
   {
-    icon: Instagram,
+    icon: Globe,
     label: "Instagram",
     value: "@unicorn_academy",
     href: "https://instagram.com/unicorn_academy",
