@@ -16,18 +16,11 @@ import {
 const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 const weekData = [45, 52, 38, 65, 72, 48, 30];
 
-const recentStudents = [
-  { name: "Азамат К.", time: "10:23", status: "online", device: "Windows" },
-  { name: "Мария П.", time: "09:45", status: "online", device: "Mac" },
-  { name: "Ержан М.", time: "08:30", status: "offline", device: "iPhone" },
-  { name: "Дана Б.", time: "11:12", status: "online", device: "Android" },
-];
-
 const stats = [
-  { label: "Всего посетителей", value: "1,247", icon: Users, change: "+12%" },
-  { label: "Сейчас онлайн", value: "8", icon: Activity, change: "+3" },
-  { label: "Входов сегодня", value: "64", icon: LogOut, change: "+18%" },
-  { label: "Кабинеты активны", value: "7/10", icon: Video, change: "70%" },
+  { label: "Всего посетителей", value: "—", icon: Users, change: "—" },
+  { label: "Сейчас онлайн", value: "—", icon: Activity, change: "—" },
+  { label: "Входов сегодня", value: "—", icon: LogOut, change: "—" },
+  { label: "Кабинеты активны", value: "—", icon: Video, change: "—" },
 ];
 
 const quickActions = [
@@ -97,7 +90,7 @@ export default function AdminDashboard() {
           </div>
         </motion.div>
 
-        {/* Online students */}
+        {/* Online students — placeholder for live data */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -105,31 +98,9 @@ export default function AdminDashboard() {
           className="bg-[#12122a] border border-indigo-500/10 rounded-2xl p-6"
         >
           <h3 className="font-semibold text-white mb-4">Активные ученики</h3>
-          <div className="space-y-4">
-            {recentStudents.map((s) => (
-              <div key={s.name} className="flex items-center gap-3">
-                <div
-                  className={`w-2.5 h-2.5 rounded-full ${
-                    s.status === "online" ? "bg-emerald-500" : "bg-indigo-200/20"
-                  }`}
-                />
-                <div className="flex-1">
-                  <p className="text-sm text-white">{s.name}</p>
-                  <p className="text-xs text-indigo-200/40">
-                    {s.time} · {s.device}
-                  </p>
-                </div>
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
-                    s.status === "online"
-                      ? "bg-emerald-500/10 text-emerald-400"
-                      : "bg-indigo-200/10 text-indigo-200/40"
-                  }`}
-                >
-                  {s.status === "online" ? "Онлайн" : "Офлайн"}
-                </span>
-              </div>
-            ))}
+          <div className="flex flex-col items-center justify-center py-8 text-indigo-200/20">
+            <Users className="w-12 h-12 mb-3" />
+            <p className="text-sm text-indigo-200/40">Нет данных</p>
           </div>
         </motion.div>
       </div>

@@ -31,10 +31,10 @@ const TELEGRAM_LINK =
   "https://t.me/Nu_wwx?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20the%20courses%20at%20Unicorn%20Academy.";
 
 const stats = [
-  { value: "500+", label: "Учеников", icon: Users },
-  { value: "15", label: "Преподавателей", icon: GraduationCap },
-  { value: "1000+", label: "Уроков", icon: BookOpen },
-  { value: "5 лет", label: "На рынке", icon: Award },
+  { value: "—", label: "Учеников", icon: Users },
+  { value: "—", label: "Преподавателей", icon: GraduationCap },
+  { value: "—", label: "Уроков", icon: BookOpen },
+  { value: "—", label: "На рынке", icon: Award },
 ];
 
 const trustCards = [
@@ -88,35 +88,7 @@ const trustCards = [
   },
 ];
 
-const teachers = [
-  {
-    name: "Айгерим Нурланова",
-    subject: "IELTS Expert & General English",
-    ielts: "8.5",
-    bio: "Сертифицированный экзаменатор IELTS, магистр лингвистики, 10 лет опыта преподавания. Специализируется на подготовке к IELTS и академическому английскому.",
-    avatar: "АН",
-    color: "from-indigo-500 to-blue-600",
-    flag: "🇰🇿",
-  },
-  {
-    name: "Michael Johnson",
-    subject: "Native Speaker & Conversation",
-    ielts: "—",
-    bio: "Носитель языка из Великобритании (Лондон), сертификат CELTA, 8 лет преподавания. Эксперт по разговорному английскому и произношению.",
-    avatar: "MJ",
-    color: "from-emerald-500 to-teal-600",
-    flag: "🇬🇧",
-  },
-  {
-    name: "Диана Сабитова",
-    subject: "General & Business English",
-    ielts: "8.0",
-    bio: "Магистр педагогических наук, сертификат TESOL, 7 лет опыта. Специалист по общему и деловому английскому, подготовке к международным экзаменам.",
-    avatar: "ДС",
-    color: "from-amber-500 to-orange-600",
-    flag: "🇰🇿",
-  },
-];
+// Teachers removed — real teachers will be added from the database
 
 const reviewsData = [
   {
@@ -389,88 +361,6 @@ export default function HomePage() {
       <PricingSection />
 
       {/* ============================================ */}
-      {/* TEACHERS SECTION */}
-      {/* ============================================ */}
-      <section id="teachers" className="py-20 lg:py-28 relative overflow-hidden bg-muted/30">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(79,70,229,0.04),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(16,185,129,0.03),transparent_50%)]" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <span className="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-semibold tracking-wider uppercase mb-5 inline-block border border-emerald-500/20">
-              Преподаватели
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
-              Лучшие из лучших
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Сертифицированные преподаватели с международным опытом и высокими результатами учеников
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {teachers.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                whileHover={{ y: -4 }}
-                className="relative rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 p-8 text-center overflow-hidden"
-              >
-                {/* Decorative gradient */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${t.color}`} />
-
-                {/* Avatar */}
-                <div
-                  className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-3xl mx-auto mb-5 shadow-xl shadow-indigo-500/20 group-hover:scale-110 transition-transform`}
-                >
-                  {t.avatar}
-                </div>
-
-                {/* Name & role */}
-                <h3 className="text-xl font-bold">{t.name}</h3>
-                <p className="text-sm text-indigo-600 dark:text-indigo-400 font-medium mt-1">
-                  {t.subject}
-                </p>
-
-                {/* IELTS badge */}
-                {t.ielts !== "—" && (
-                  <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-semibold mt-3 border border-emerald-500/20">
-                    <Target className="w-3.5 h-3.5" />
-                    IELTS {t.ielts}
-                  </div>
-                )}
-
-                {/* Flag */}
-                <div className="mt-3 text-xl">{t.flag}</div>
-
-                {/* Bio */}
-                <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{t.bio}</p>
-
-                {/* CTA */}
-                <a
-                  href={TELEGRAM_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 text-sm font-medium transition-all shadow-lg shadow-indigo-500/25"
-                >
-                  Записаться к преподавателю
-                  <ChevronRight className="w-4 h-4" />
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
       {/* REVIEWS SECTION */}
       {/* ============================================ */}
       <section id="reviews" className="py-20 lg:py-28 relative overflow-hidden">
@@ -562,7 +452,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 max-w-2xl mx-auto">
             {/* Telegram */}
             <motion.a
               initial={{ opacity: 0, y: 20 }}
@@ -582,109 +472,6 @@ export default function HomePage() {
                 <p className="text-xs text-sky-500 font-medium mt-0.5">Написать →</p>
               </div>
             </motion.a>
-
-            {/* WhatsApp */}
-            <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.05 }}
-              href="https://wa.me/77001234567"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300 p-6 flex items-center gap-4 hover:bg-emerald-500/5"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <MessageCircle className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold">WhatsApp</h3>
-                <p className="text-sm text-muted-foreground">+7 700 123 45 67</p>
-                <p className="text-xs text-emerald-500 font-medium mt-0.5">Написать →</p>
-              </div>
-            </motion.a>
-
-            {/* Instagram */}
-            <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              href="https://instagram.com/unicorn_academy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:shadow-pink-500/10 transition-all duration-300 p-6 flex items-center gap-4 hover:bg-pink-500/5"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <Image className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Instagram</h3>
-                <p className="text-sm text-muted-foreground">@unicorn_academy</p>
-                <p className="text-xs text-pink-500 font-medium mt-0.5">Подписаться →</p>
-              </div>
-            </motion.a>
-
-            {/* Email */}
-            <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.15 }}
-              href="mailto:hello@unicornacademy.com"
-              className="group rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 p-6 flex items-center gap-4 hover:bg-indigo-500/5"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <Mail className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Email</h3>
-                <p className="text-sm text-muted-foreground">hello@unicornacademy.com</p>
-                <p className="text-xs text-indigo-500 font-medium mt-0.5">Написать →</p>
-              </div>
-            </motion.a>
-
-            {/* Address */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 p-6 flex items-center gap-4"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
-                <MapPin className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Адрес</h3>
-                <p className="text-sm text-muted-foreground">
-                  г. Алматы, ул. Абая, 52
-                  <br />
-                  БЦ «Almaty Towers», 5 этаж
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Hours */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25 }}
-              className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 p-6 flex items-center gap-4"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shadow-lg">
-                <Clock className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Режим работы</h3>
-                <p className="text-sm text-muted-foreground">
-                  Пн–Сб: 09:00 – 21:00
-                  <br />
-                  Вс: Выходной
-                </p>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>

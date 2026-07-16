@@ -62,17 +62,6 @@ const initialTeachers: Teacher[] = [
     experience: "10 лет",
   },
   {
-    id: 4,
-    name: "Мария Л.",
-    subjects: ["Kids English", "Общий английский", "Beginner"],
-    bio: "Преподаватель с опытом работы с детьми и взрослыми. Использует игровые методики и интерактивные материалы.",
-    ieltsScore: "7.0",
-    photoUrl: "",
-    rating: 4.7,
-    students: 134,
-    experience: "5 лет",
-  },
-  {
     id: 5,
     name: "Елена Р.",
     subjects: ["Английский для путешествий", "Разговорный клуб"],

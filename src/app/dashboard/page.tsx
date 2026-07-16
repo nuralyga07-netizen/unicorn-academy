@@ -45,7 +45,6 @@ const tabs: DashboardTab[] = [
   { id: "attendance", label: "Посещаемость", icon: BarChart3 },
   { id: "progress", label: "Прогресс", icon: TrendingUp },
   { id: "certificates", label: "Сертификаты", icon: Award },
-  { id: "announcements", label: "Объявления", icon: Bell },
 ];
 
 // ---------- Mock data ----------
@@ -53,7 +52,7 @@ const tabs: DashboardTab[] = [
 const myCourses = [
   {
     name: "Общий английский A2",
-    teacher: "Айгерим Нурланова",
+    teacher: "Преподаватель",
     progress: 72,
     nextLesson: "Unit 8: Present Perfect",
     nextDate: "Сегодня, 10:00",
@@ -62,7 +61,7 @@ const myCourses = [
   },
   {
     name: "Разговорный клуб B1+",
-    teacher: "Michael Johnson",
+    teacher: "Преподаватель",
     progress: 45,
     nextLesson: "Topic: Travel",
     nextDate: "Сб, 11:00",
@@ -71,7 +70,7 @@ const myCourses = [
   },
   {
     name: "IELTS Preparation",
-    teacher: "Michael Johnson",
+    teacher: "Преподаватель",
     progress: 30,
     nextLesson: "Writing Task 2",
     nextDate: "Вт, 14:00",
@@ -116,11 +115,11 @@ const homeworkItems = [
 ];
 
 const scheduleEvents = [
-  { day: "Пн", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Айгерим Н.", room: "Google Meet" },
-  { day: "Вт", time: "14:00 – 16:00", course: "IELTS Preparation", teacher: "Michael J.", room: "Google Meet" },
-  { day: "Ср", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Айгерим Н.", room: "Google Meet" },
-  { day: "Пт", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Айгерим Н.", room: "Google Meet" },
-  { day: "Сб", time: "11:00 – 12:30", course: "Разговорный клуб B1+", teacher: "Michael J.", room: "Google Meet" },
+  { day: "Пн", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Преподаватель", room: "Google Meet" },
+  { day: "Вт", time: "14:00 – 16:00", course: "IELTS Preparation", teacher: "Преподаватель", room: "Google Meet" },
+  { day: "Ср", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Преподаватель", room: "Google Meet" },
+  { day: "Пт", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Преподаватель", room: "Google Meet" },
+  { day: "Сб", time: "11:00 – 12:30", course: "Разговорный клуб B1+", teacher: "Преподаватель", room: "Google Meet" },
 ];
 
 const attendanceData = [
@@ -130,29 +129,7 @@ const attendanceData = [
   { month: "Декабрь", attended: 0, total: 16, percent: 0 },
 ];
 
-const announcements = [
-  {
-    id: "1",
-    title: "Новогодняя скидка 20%!",
-    date: "15 декабря",
-    text: "До конца декабря действует скидка 20% на все курсы при оплате полного месяца.",
-    type: "promo",
-  },
-  {
-    id: "2",
-    title: "Отмена занятий 31 декабря",
-    date: "10 декабря",
-    text: "Занятия 31 декабря и 1 января отменяются. Расписание вернётся к обычному графику со 2 января.",
-    type: "info",
-  },
-  {
-    id: "3",
-    title: "Новый разговорный клуб",
-    date: "5 декабря",
-    text: "Открываем новый разговорный клуб по субботам в 15:00. Ведущий — Michael Johnson.",
-    type: "info",
-  },
-];
+// Announcements removed — real announcements will come from the database
 
 // ---------- Tab content components ----------
 
@@ -293,11 +270,11 @@ function ProfileTab() {
       <div className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-xl p-8">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white font-bold text-3xl shadow-xl shadow-indigo-500/20">
-            А
+            У
           </div>
           <div className="text-center sm:text-left flex-1">
-            <h3 className="text-2xl font-bold">Азамат К.</h3>
-            <p className="text-muted-foreground">Ученик · Уровень A2</p>
+            <h3 className="text-2xl font-bold">Ученик</h3>
+            <p className="text-muted-foreground">Уровень A2</p>
             <div className="flex flex-wrap gap-3 mt-4">
               {[
                 { label: "Курсов", value: "3" },
@@ -507,48 +484,6 @@ function CertificatesTab() {
   );
 }
 
-function AnnouncementsTab() {
-  const typeColors: Record<string, string> = {
-    promo: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-    info: "bg-indigo-500/10 text-indigo-500 border-indigo-500/20",
-  };
-
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Объявления</h2>
-      <div className="space-y-4">
-        {announcements.map((ann, i) => (
-          <motion.div
-            key={ann.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-            className="rounded-2xl border border-white/20 dark:border-indigo-800/30 bg-white/70 dark:bg-indigo-950/30 backdrop-blur-xl shadow-lg p-5 lg:p-6 hover:shadow-xl transition-all"
-          >
-            <div className="flex items-start gap-4">
-              <Bell className="w-5 h-5 text-indigo-500 mt-0.5 shrink-0" />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <h3 className="font-semibold">{ann.title}</h3>
-                  <span
-                    className={`shrink-0 text-[10px] px-2.5 py-1 rounded-full font-medium border ${
-                      typeColors[ann.type]
-                    }`}
-                  >
-                    {ann.type === "promo" ? "Акция" : "Инфо"}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground">{ann.text}</p>
-                <p className="text-xs text-muted-foreground mt-2">{ann.date}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 // ---------- Tab content map ----------
 
 const tabContent: Record<string, React.ReactNode> = {
@@ -559,7 +494,6 @@ const tabContent: Record<string, React.ReactNode> = {
   attendance: <AttendanceTab />,
   progress: <ProgressTab />,
   certificates: <CertificatesTab />,
-  announcements: <AnnouncementsTab />,
 };
 
 // ---------- Main component ----------
@@ -658,7 +592,7 @@ export default function StudentDashboard() {
                 Поддержка
               </a>
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/20">
-                А
+                У
               </div>
             </div>
           </div>
