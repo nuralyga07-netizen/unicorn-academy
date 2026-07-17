@@ -20,7 +20,7 @@ const defaultPlans: PricingPlan[] = [
   {
     name: "Общий английский",
     subtitle: "Для повседневного общения",
-    price: "25 000",
+    price: "20 000",
     period: "месяц",
     description: "Полный курс английского языка для всех уровней — от начального до продвинутого.",
     features: [
@@ -36,7 +36,7 @@ const defaultPlans: PricingPlan[] = [
   {
     name: "IELTS",
     subtitle: "Интенсивная подготовка",
-    price: "30 000",
+    price: "25 000",
     period: "месяц",
     description: "Целенаправленная подготовка к IELTS с опытными преподавателями и экзаменаторами.",
     features: [
@@ -54,7 +54,7 @@ const defaultPlans: PricingPlan[] = [
   {
     name: "Индивидуальные",
     subtitle: "Персональный подход",
-    price: "40 000",
+    price: "35 000",
     period: "месяц",
     description: "Персональные занятия с преподавателем по индивидуальной программе под ваши цели.",
     features: [

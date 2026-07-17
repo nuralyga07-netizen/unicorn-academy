@@ -30,7 +30,7 @@ const initialCourses: Course[] = [
     id: 1,
     title: "Общий английский",
     description: "Комплексная программа изучения английского языка для всех уровней — от Beginner до Advanced. Включает грамматику, разговорную практику, аудирование и письмо.",
-    price: "25,000₸",
+    price: "20,000₸",
     features: ["Групповые занятия 3 раза в неделю", "Доступ к учебным материалам", "Разговорный клуб", "Домашние задания с проверкой", "Сертификат об окончании"],
     isActive: true,
     students: 89,
@@ -41,7 +41,7 @@ const initialCourses: Course[] = [
     id: 2,
     title: "IELTS Preparation",
     description: "Интенсивная подготовка к IELTS Academic и General. Полный разбор всех секций: Listening, Reading, Writing, Speaking.",
-    price: "30,000₸",
+    price: "25,000₸",
     features: ["Индивидуальный план подготовки", "Пробные тесты каждую неделю", "Разбор Writing с экспертом", "Speaking практика 1-on-1", "Гарантия результата 6.0+"],
     isActive: true,
     students: 67,
@@ -52,7 +52,7 @@ const initialCourses: Course[] = [
     id: 3,
     title: "Индивидуальные занятия",
     description: "Персональная программа обучения с преподавателем. Полная адаптация под ваши цели, темп и график.",
-    price: "40,000₸",
+    price: "35,000₸",
     features: ["Индивидуальный график", "Программа под ваш запрос", "Фокус на слабые места", "Обратная связь 24/7", "Материалы для самостоятельной работы"],
     isActive: true,
     students: 34,
@@ -284,7 +284,7 @@ function CourseModal({
               <input
                 value={form.price}
                 onChange={(e) => setForm({ ...form, price: e.target.value })}
-                placeholder="25,000₸"
+                placeholder="20,000₸"
                 className="w-full h-11 px-4 rounded-xl bg-[#0a0a1a] border border-indigo-500/10 text-white text-sm focus:outline-none focus:border-indigo-500/30"
               />
             </div>

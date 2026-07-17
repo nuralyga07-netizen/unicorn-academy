@@ -14,6 +14,7 @@ import {
   X,
   Check,
   Users,
+  Key,
 } from "lucide-react";
 
 interface Classroom {
@@ -26,19 +27,21 @@ interface Classroom {
   schedule: string;
   isActive: boolean;
   studentCount: number;
+  password: string;
+  classroomNumber: string;
 }
 
 const initialClassrooms: Classroom[] = [
-  { id: 1, name: "Английский A1 — Утренняя группа", teacher: "Айгуль К.", topic: "Общий английский (Beginner)", meetLink: "https://meet.google.com/abc-defg-hij", formLink: "https://forms.google.com/attendance-1", schedule: "Пн, Ср, Пт 09:00-10:30", isActive: true, studentCount: 12 },
-  { id: 2, name: "Английский A2 — Дневная группа", teacher: "Сергей М.", topic: "Общий английский (Elementary)", meetLink: "https://meet.google.com/klm-nopq-rst", formLink: "https://forms.google.com/attendance-2", schedule: "Пн, Ср 14:00-15:30", isActive: true, studentCount: 8 },
-  { id: 3, name: "IELTS Preparation", teacher: "Динара Б.", topic: "IELTS Preparation", meetLink: "https://meet.google.com/uvw-xyz-123", formLink: "https://forms.google.com/attendance-3", schedule: "Вт, Чт, Сб 11:00-12:30", isActive: true, studentCount: 15 },
-  { id: 4, name: "Разговорный клуб Intermediate", teacher: "Айгуль К.", topic: "Разговорная практика", meetLink: "https://meet.google.com/456-789-abc", formLink: "https://forms.google.com/attendance-4", schedule: "Сб 15:00-16:30", isActive: false, studentCount: 6 },
-  { id: 5, name: "Business English", teacher: "Сергей М.", topic: "Деловой английский", meetLink: "https://meet.google.com/def-ghi-jkl", formLink: "https://forms.google.com/attendance-5", schedule: "Вт, Чт 16:00-17:30", isActive: true, studentCount: 10 },
-  { id: 6, name: "Английский B1 — Вечерняя группа", teacher: "—", topic: "Общий английский (Intermediate)", meetLink: "https://meet.google.com/mno-pqr-stu", formLink: "https://forms.google.com/attendance-6", schedule: "Пн, Ср, Пт 18:00-19:30", isActive: true, studentCount: 14 },
-  { id: 7, name: "IELTS Writing Intensive", teacher: "Динара Б.", topic: "IELTS Writing", meetLink: "https://meet.google.com/vwx-yz0-123", formLink: "https://forms.google.com/attendance-7", schedule: "Пн, Чт 10:00-11:30", isActive: true, studentCount: 9 },
-  { id: 8, name: "Английский для детей 8-12 лет", teacher: "—", topic: "Kids English", meetLink: "https://meet.google.com/456-def-ghi", formLink: "https://forms.google.com/attendance-8", schedule: "Сб, Вс 10:00-11:00", isActive: true, studentCount: 7 },
-  { id: 9, name: "Grammar Booster", teacher: "Айгуль К.", topic: "Грамматика B1-B2", meetLink: "https://meet.google.com/jkl-mno-pqr", formLink: "https://forms.google.com/attendance-9", schedule: "Ср 17:00-18:00", isActive: false, studentCount: 4 },
-  { id: 10, name: "Speaking Club Advanced", teacher: "Динара Б.", topic: "Advanced Speaking", meetLink: "https://meet.google.com/stu-vwx-yz0", formLink: "https://forms.google.com/attendance-10", schedule: "Пт 19:00-20:30", isActive: true, studentCount: 11 },
+  { id: 1, name: "Английский A1 — Утренняя группа", teacher: "Айгуль К.", topic: "Общий английский (Beginner)", meetLink: "https://meet.google.com/abc-defg-hij", formLink: "https://forms.google.com/attendance-1", schedule: "Пн, Ср, Пт 09:00-10:30", isActive: true, studentCount: 12, password: "1234", classroomNumber: "001" },
+  { id: 2, name: "Английский A2 — Дневная группа", teacher: "Сергей М.", topic: "Общий английский (Elementary)", meetLink: "https://meet.google.com/klm-nopq-rst", formLink: "https://forms.google.com/attendance-2", schedule: "Пн, Ср 14:00-15:30", isActive: true, studentCount: 8, password: "5678", classroomNumber: "002" },
+  { id: 3, name: "IELTS Preparation", teacher: "Динара Б.", topic: "IELTS Preparation", meetLink: "https://meet.google.com/uvw-xyz-123", formLink: "https://forms.google.com/attendance-3", schedule: "Вт, Чт, Сб 11:00-12:30", isActive: true, studentCount: 15, password: "9012", classroomNumber: "003" },
+  { id: 4, name: "Разговорный клуб Intermediate", teacher: "Айгуль К.", topic: "Разговорная практика", meetLink: "https://meet.google.com/456-789-abc", formLink: "https://forms.google.com/attendance-4", schedule: "Сб 15:00-16:30", isActive: false, studentCount: 6, password: "3456", classroomNumber: "004" },
+  { id: 5, name: "Business English", teacher: "Сергей М.", topic: "Деловой английский", meetLink: "https://meet.google.com/def-ghi-jkl", formLink: "https://forms.google.com/attendance-5", schedule: "Вт, Чт 16:00-17:30", isActive: true, studentCount: 10, password: "7890", classroomNumber: "005" },
+  { id: 6, name: "Английский B1 — Вечерняя группа", teacher: "—", topic: "Общий английский (Intermediate)", meetLink: "https://meet.google.com/mno-pqr-stu", formLink: "https://forms.google.com/attendance-6", schedule: "Пн, Ср, Пт 18:00-19:30", isActive: true, studentCount: 14, password: "1111", classroomNumber: "006" },
+  { id: 7, name: "IELTS Writing Intensive", teacher: "Динара Б.", topic: "IELTS Writing", meetLink: "https://meet.google.com/vwx-yz0-123", formLink: "https://forms.google.com/attendance-7", schedule: "Пн, Чт 10:00-11:30", isActive: true, studentCount: 9, password: "2222", classroomNumber: "007" },
+  { id: 8, name: "Английский для детей 8-12 лет", teacher: "—", topic: "Kids English", meetLink: "https://meet.google.com/456-def-ghi", formLink: "https://forms.google.com/attendance-8", schedule: "Сб, Вс 10:00-11:00", isActive: true, studentCount: 7, password: "3333", classroomNumber: "008" },
+  { id: 9, name: "Grammar Booster", teacher: "Айгуль К.", topic: "Грамматика B1-B2", meetLink: "https://meet.google.com/jkl-mno-pqr", formLink: "https://forms.google.com/attendance-9", schedule: "Ср 17:00-18:00", isActive: false, studentCount: 4, password: "4444", classroomNumber: "009" },
+  { id: 10, name: "Speaking Club Advanced", teacher: "Динара Б.", topic: "Advanced Speaking", meetLink: "https://meet.google.com/stu-vwx-yz0", formLink: "https://forms.google.com/attendance-10", schedule: "Пт 19:00-20:30", isActive: true, studentCount: 11, password: "5555", classroomNumber: "010" },
 ];
 
 export default function ClassroomsPage() {
@@ -73,7 +76,8 @@ export default function ClassroomsPage() {
 
   const addClassroom = (data: Classroom) => {
     const newId = Math.max(...classrooms.map((c) => c.id)) + 1;
-    setClassrooms((prev) => [...prev, { ...data, id: newId }]);
+    const nextNum = (classrooms.length + 1).toString().padStart(3, "0");
+    setClassrooms((prev) => [...prev, { ...data, id: newId, classroomNumber: nextNum }]);
     setShowAdd(false);
   };
 
@@ -145,8 +149,10 @@ export default function ClassroomsPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-indigo-500/10">
+                <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">№</th>
                 <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">Кабинет</th>
                 <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">Преподаватель</th>
+                <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">Пароль</th>
                 <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">Google Meet</th>
                 <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">Форма</th>
                 <th className="text-left text-xs text-indigo-200/40 font-medium px-6 py-4">Статус</th>
@@ -164,6 +170,9 @@ export default function ClassroomsPage() {
                   className="border-b border-indigo-500/5 hover:bg-indigo-500/5 transition-colors"
                 >
                   <td className="px-6 py-4">
+                    <span className="text-sm text-indigo-400 font-mono">{c.classroomNumber}</span>
+                  </td>
+                  <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-xl bg-indigo-500/10 flex items-center justify-center">
                         <Monitor className="w-4 h-4 text-indigo-400" />
@@ -180,10 +189,20 @@ export default function ClassroomsPage() {
                   <td className="px-6 py-4">
                     <button
                       onClick={() => setEditing(c)}
+                      className="flex items-center gap-1.5 text-sm text-amber-400 hover:text-amber-300 transition-colors"
+                    >
+                      <Key className="w-3.5 h-3.5" />
+                      <span className="font-mono tracking-wider">{c.password}</span>
+                      <ExternalLink className="w-3 h-3 opacity-60" />
+                    </button>
+                  </td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => setEditing(c)}
                       className="flex items-center gap-1.5 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
                     >
                       <Link2 className="w-3.5 h-3.5" />
-                      <span className="max-w-[160px] truncate">{c.meetLink}</span>
+                      <span className="max-w-[140px] truncate">{c.meetLink}</span>
                       <ExternalLink className="w-3 h-3" />
                     </button>
                   </td>
@@ -193,7 +212,7 @@ export default function ClassroomsPage() {
                       className="flex items-center gap-1.5 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
                     >
                       <Link2 className="w-3.5 h-3.5" />
-                      <span className="max-w-[160px] truncate">{c.formLink}</span>
+                      <span className="max-w-[140px] truncate">{c.formLink}</span>
                       <ExternalLink className="w-3 h-3" />
                     </button>
                   </td>
@@ -232,7 +251,7 @@ export default function ClassroomsPage() {
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center">
+                  <td colSpan={9} className="px-6 py-12 text-center">
                     <Monitor className="w-10 h-10 mx-auto text-indigo-200/20 mb-3" />
                     <p className="text-sm text-indigo-200/40">Кабинеты не найдены</p>
                   </td>
@@ -267,6 +286,8 @@ export default function ClassroomsPage() {
             schedule: "",
             isActive: true,
             studentCount: 0,
+            password: "",
+            classroomNumber: "",
           }}
           onSave={(data) => addClassroom(data as Classroom)}
           onClose={() => setShowAdd(false)}
@@ -314,6 +335,26 @@ function ClassroomModal({
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full h-11 px-4 rounded-xl bg-[#0a0a1a] border border-indigo-500/10 text-white text-sm focus:outline-none focus:border-indigo-500/30"
             />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-indigo-200/60 mb-1.5">Номер кабинета</label>
+              <input
+                value={form.classroomNumber}
+                onChange={(e) => setForm({ ...form, classroomNumber: e.target.value })}
+                placeholder="001"
+                className="w-full h-11 px-4 rounded-xl bg-[#0a0a1a] border border-indigo-500/10 text-white text-sm focus:outline-none focus:border-indigo-500/30 font-mono"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-indigo-200/60 mb-1.5">Пароль</label>
+              <input
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                placeholder="1234"
+                className="w-full h-11 px-4 rounded-xl bg-[#0a0a1a] border border-indigo-500/10 text-white text-sm focus:outline-none focus:border-indigo-500/30 font-mono tracking-wider"
+              />
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
