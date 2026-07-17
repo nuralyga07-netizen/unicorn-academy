@@ -30,7 +30,7 @@ interface Teacher {
 const initialTeachers: Teacher[] = [
   {
     id: 1,
-    name: "Айгуль К.",
+    name: "—",
     subjects: ["Общий английский", "Грамматика", "Разговорный клуб"],
     bio: "Сертифицированный преподаватель с 8-летним опытом. Специализируется на обучении взрослых и подростков. Использует коммуникативную методику.",
     ieltsScore: "7.5",
@@ -41,7 +41,7 @@ const initialTeachers: Teacher[] = [
   },
   {
     id: 2,
-    name: "Сергей М.",
+    name: "—",
     subjects: ["Business English", "Общий английский"],
     bio: "Эксперт в области делового английского. 6 лет преподавания в международных компаниях. MBA степень.",
     ieltsScore: "8.0",
@@ -52,7 +52,7 @@ const initialTeachers: Teacher[] = [
   },
   {
     id: 3,
-    name: "Динара Б.",
+    name: "—",
     subjects: ["IELTS Preparation", "Academic Writing"],
     bio: "Сертифицированный IELTS эксперт. Подготовила более 200 студентов к сдаче IELTS. Средний балл студентов — 6.5.",
     ieltsScore: "8.5",
