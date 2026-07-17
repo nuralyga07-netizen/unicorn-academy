@@ -12,7 +12,6 @@ import {
   PowerOff,
   Monitor,
   X,
-  Check,
   Users,
   Key,
 } from "lucide-react";

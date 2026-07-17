@@ -7,7 +7,6 @@ import {
   FileText,
   Clock,
   Users,
-  MapPin,
   Calendar,
   Play,
   CheckCircle2,

@@ -10,16 +10,13 @@ import {
   Calendar,
   BarChart3,
   Award,
-  Bell,
   ChevronRight,
   GraduationCap,
   CheckCircle2,
   Clock,
   TrendingUp,
-  FileText,
   Video,
   Menu,
-  X,
   LogOut,
   Star,
   Play,
@@ -597,6 +594,44 @@ export default function StudentDashboard() {
             </div>
           </div>
         </header>
+
+        {/* Free trial lesson banner */}
+        <div className="p-4 lg:p-8 pb-0 lg:pb-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 shadow-xl shadow-indigo-500/20"
+          >
+            {/* Decorative elements */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-white/5 blur-3xl" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-emerald-400/10 blur-2xl" />
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 lg:p-8">
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                  <Star className="w-7 h-7 text-yellow-300" />
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">
+                    Пробный урок и определение уровня — бесплатно!
+                  </h3>
+                  <p className="text-indigo-200/80 text-sm sm:text-base mt-1 max-w-xl">
+                    Запишитесь на бесплатное занятие, познакомьтесь с преподавателем и узнайте свой уровень английского
+                  </p>
+                </div>
+              </div>
+              <a
+                href={TELEGRAM_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-indigo-700 hover:bg-indigo-50 font-semibold text-sm transition-all shadow-lg shrink-0 whitespace-nowrap"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Записаться на пробный
+              </a>
+            </div>
+          </motion.div>
+        </div>
 
         {/* Tab content */}
         <main className="p-4 lg:p-8">
