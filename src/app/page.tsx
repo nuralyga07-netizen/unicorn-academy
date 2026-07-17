@@ -90,40 +90,14 @@ const trustCards = [
 
 // Teachers removed — real teachers will be added from the database
 
-const reviewsData = [
-  {
-    name: "Азамат К.",
-    role: "IELTS 7.5",
-    text: "Готовился к IELTS 3 месяца, сдал на 7.5! Преподаватели настоящие профессионалы. Отдельное спасибо за интенсивные mock-тесты — они реально готовят к формату экзамена.",
-    rating: 5,
-    avatar: "АК",
-    gradient: "from-indigo-500 to-blue-600",
-  },
-  {
-    name: "Мария С.",
-    role: "Общий английский A2 → B1",
-    text: "Очень удобная платформа, всё понятно. Английский подтянула за 2 месяца с нуля до уверенного A2. Групповые занятия оказались даже эффективнее индивидуальных!",
-    rating: 5,
-    avatar: "МС",
-    gradient: "from-emerald-500 to-teal-600",
-  },
-  {
-    name: "Ержан М.",
-    role: "Business English",
-    text: "Индивидуальные занятия — лучшее решение для занятых людей. Гибкий график, отличный преподаватель и реально видимый прогресс. Коллеги заметили улучшение моего английского.",
-    rating: 5,
-    avatar: "ЕМ",
-    gradient: "from-amber-500 to-orange-600",
-  },
-  {
-    name: "Дана Б.",
-    role: "Общий английский B1 → B2",
-    text: "Занимаюсь уже полгода — результат превзошёл ожидания. Разговорный клуб с носителем языка отдельный восторг! Очень дружелюбная атмосфера и профессиональный подход.",
-    rating: 5,
-    avatar: "ДБ",
-    gradient: "from-purple-500 to-violet-600",
-  },
-];
+const reviewsData: {
+  name: string;
+  role: string;
+  text: string;
+  rating: number;
+  avatar: string;
+  gradient: string;
+}[] = [];
 
 export default function HomePage() {
   return (
@@ -380,7 +354,7 @@ export default function HomePage() {
               Что говорят ученики
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Более 500 учеников уже достигли своих целей с нами
+              Наши ученики уже достигли своих целей с нами
             </p>
           </motion.div>
 

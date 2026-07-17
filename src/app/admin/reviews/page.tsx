@@ -23,18 +23,7 @@ interface Review {
   status: "pending" | "approved" | "rejected" | "hidden";
 }
 
-const initialReviews: Review[] = [
-  { id: 1, name: "Азамат К.", course: "Общий английский", rating: 5, text: "Отличная школа! За 3 месяца заметно подтянул уровень. Преподаватели очень внимательные и профессиональные.", date: "2024-03-15", status: "approved" },
-  { id: 2, name: "Мария П.", course: "IELTS Preparation", rating: 5, text: "Сдала IELTS на 7.0 благодаря Динаре! Очень структурированный подход к подготовке.", date: "2024-03-14", status: "approved" },
-  { id: 3, name: "Ержан М.", course: "Business English", rating: 4, text: "Хороший курс для делового общения. Много практических кейсов.", date: "2024-03-13", status: "pending" },
-  { id: 4, name: "Дана Б.", course: "Общий английский", rating: 5, text: "Нравится формат обучения. Удобное расписание, хорошие материалы. Рекомендую!", date: "2024-03-12", status: "approved" },
-  { id: 5, name: "Руслан Т.", course: "IELTS Preparation", rating: 4, text: "Готовился к IELTS 2 месяца. Результат 6.5. Доволен, хотя ожидал большего.", date: "2024-03-11", status: "pending" },
-  { id: 6, name: "Алия С.", course: "Индивидуальные занятия", rating: 5, text: "Индивидуальный подход — это лучшее, что может быть. Программа полностью подстроена под мои цели.", date: "2024-03-10", status: "approved" },
-  { id: 7, name: "Нурлан Б.", course: "Разговорный клуб", rating: 3, text: "Хорошая практика, но хотелось бы больше времени на speaking.", date: "2024-03-09", status: "pending" },
-  { id: 8, name: "Гульнара М.", course: "Общий английский", rating: 5, text: "Лучшая онлайн-школа английского в Казахстане! Очень рада, что выбрала Unicorn Academy.", date: "2024-03-08", status: "approved" },
-  { id: 9, name: "Тимур Ж.", course: "Business English", rating: 2, text: "Ожидал более интенсивной программы. Мало разговорной практики.", date: "2024-03-07", status: "pending" },
-  { id: 10, name: "Анель К.", course: "Индивидуальные занятия", rating: 5, text: "Занимаюсь уже полгода, прогресс колоссальный. Спасибо Айгуль!", date: "2024-03-06", status: "approved" },
-];
+const initialReviews: Review[] = [];
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState(initialReviews);

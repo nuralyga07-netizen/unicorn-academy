@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-const weekData = [45, 52, 38, 65, 72, 48, 30];
+const weekData = [0, 0, 0, 0, 0, 0, 0];
 
 const stats = [
   { label: "Всего посетителей", value: "—", icon: Users, change: "—" },

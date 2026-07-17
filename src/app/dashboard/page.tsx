@@ -44,87 +44,41 @@ const tabs: DashboardTab[] = [
   { id: "certificates", label: "Сертификаты", icon: Award },
 ];
 
-// ---------- Mock data ----------
+// ---------- Mock data will be loaded from the database ----------
 
-const myCourses = [
-  {
-    name: "Общий английский A2",
-    teacher: "Преподаватель",
-    progress: 72,
-    nextLesson: "Unit 8: Present Perfect",
-    nextDate: "Сегодня, 10:00",
-    grade: "A-",
-    color: "from-indigo-500 to-blue-600",
-  },
-  {
-    name: "Разговорный клуб B1+",
-    teacher: "Преподаватель",
-    progress: 45,
-    nextLesson: "Topic: Travel",
-    nextDate: "Сб, 11:00",
-    grade: "B+",
-    color: "from-emerald-500 to-teal-600",
-  },
-  {
-    name: "IELTS Preparation",
-    teacher: "Преподаватель",
-    progress: 30,
-    nextLesson: "Writing Task 2",
-    nextDate: "Вт, 14:00",
-    grade: "-",
-    color: "from-amber-500 to-orange-600",
-  },
-];
+const myCourses: {
+  name: string;
+  teacher: string;
+  progress: number;
+  nextLesson: string;
+  nextDate: string;
+  grade: string;
+  color: string;
+}[] = [];
 
-const homeworkItems = [
-  {
-    id: "1",
-    title: "Unit 8: Present Perfect Exercises",
-    course: "Общий английский A2",
-    dueDate: "Завтра, 23:59",
-    status: "pending",
-    description: "Выполнить упражнения 1-15 на стр. 42-45",
-  },
-  {
-    id: "2",
-    title: "IELTS Writing Task 2 Essay",
-    course: "IELTS Preparation",
-    dueDate: "Пт, 18:00",
-    status: "in_progress",
-    description: "Написать эссе на тему 'Education' (250-300 слов)",
-  },
-  {
-    id: "3",
-    title: "Vocabulary Unit 5-6 Review",
-    course: "Общий английский A2",
-    dueDate: "Ср, 23:59",
-    status: "completed",
-    description: "Повторить слова из Unit 5-6, подготовиться к тесту",
-  },
-  {
-    id: "4",
-    title: "Speaking Practice: Travel Vocabulary",
-    course: "Разговорный клуб B1+",
-    dueDate: "Сб, 10:00",
-    status: "pending",
-    description: "Подготовить монолог на тему 'My last trip' (2 минуты)",
-  },
-];
+const homeworkItems: {
+  id: string;
+  title: string;
+  course: string;
+  dueDate: string;
+  status: string;
+  description: string;
+}[] = [];
 
-const scheduleEvents = [
-  { day: "Пн", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Преподаватель", room: "Google Meet" },
-  { day: "Вт", time: "14:00 – 16:00", course: "IELTS Preparation", teacher: "Преподаватель", room: "Google Meet" },
-  { day: "Ср", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Преподаватель", room: "Google Meet" },
-  { day: "Пт", time: "10:00 – 11:30", course: "Общий английский A2", teacher: "Преподаватель", room: "Google Meet" },
-  { day: "Сб", time: "11:00 – 12:30", course: "Разговорный клуб B1+", teacher: "Преподаватель", room: "Google Meet" },
-];
+const scheduleEvents: {
+  day: string;
+  time: string;
+  course: string;
+  teacher: string;
+  room: string;
+}[] = [];
 
-const attendanceData = [
-  { month: "Сентябрь", attended: 12, total: 16, percent: 75 },
-  { month: "Октябрь", attended: 14, total: 16, percent: 88 },
-  { month: "Ноябрь", attended: 10, total: 12, percent: 83 },
-  { month: "Декабрь", attended: 0, total: 16, percent: 0 },
-];
+const attendanceData: {
+  month: string;
+  attended: number;
+  total: number;
+  percent: number;
+}[] = [];
 
 // Announcements removed — real announcements will come from the database
 
@@ -270,13 +224,13 @@ function ProfileTab() {
             У
           </div>
           <div className="text-center sm:text-left flex-1">
-            <h3 className="text-2xl font-bold">Ученик</h3>
-            <p className="text-muted-foreground">Уровень A2</p>
+            <h3 className="text-2xl font-bold">—</h3>
+            <p className="text-muted-foreground">—</p>
             <div className="flex flex-wrap gap-3 mt-4">
               {[
-                { label: "Курсов", value: "3" },
-                { label: "Уроков", value: "36" },
-                { label: "Дней в академии", value: "94" },
+                { label: "Курсов", value: "—" },
+                { label: "Уроков", value: "—" },
+                { label: "Дней в академии", value: "—" },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -396,14 +350,11 @@ function AttendanceTab() {
 }
 
 function ProgressTab() {
-  const progressData = [
-    { label: "Грамматика", value: 68, color: "from-indigo-500 to-blue-500" },
-    { label: "Лексика", value: 55, color: "from-emerald-500 to-teal-500" },
-    { label: "Аудирование", value: 72, color: "from-amber-500 to-orange-500" },
-    { label: "Чтение", value: 80, color: "from-purple-500 to-violet-500" },
-    { label: "Письмо", value: 45, color: "from-pink-500 to-rose-500" },
-    { label: "Говорение", value: 60, color: "from-cyan-500 to-sky-500" },
-  ];
+  const progressData: {
+    label: string;
+    value: number;
+    color: string;
+  }[] = [];
 
   return (
     <div className="space-y-6">
@@ -437,10 +388,12 @@ function ProgressTab() {
 }
 
 function CertificatesTab() {
-  const certificates = [
-    { name: "Общий английский A1", date: "15.06.2025", grade: "A", status: "completed" },
-    { name: "Общий английский A2", date: "В процессе", grade: "-", status: "in_progress" },
-  ];
+  const certificates: {
+    name: string;
+    date: string;
+    grade: string;
+    status: string;
+  }[] = [];
 
   return (
     <div className="space-y-6">
