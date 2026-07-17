@@ -211,10 +211,10 @@ export default function HomePage() {
               {/* Trust markers */}
               <div className="mt-12 flex flex-wrap items-center gap-6">
                 {[
-                  { icon: Shield, text: "Гос. лицензия" },
-                  { icon: Users, text: "500+ учеников" },
-                  { icon: Award, text: "5 лет опыта" },
-                ].map((item) => (
+                    { icon: Shield, text: "Гос. лицензия" },
+                    { icon: Users, text: "— учеников" },
+                    { icon: Award, text: "— лет опыта" },
+                  ].map((item) => (
                   <div key={item.text} className="flex items-center gap-2 text-white/40 text-sm">
                     <item.icon className="w-4 h-4 text-emerald-400" />
                     <span>{item.text}</span>
@@ -233,35 +233,35 @@ export default function HomePage() {
               <div className="relative">
                 {/* Glass card */}
                 <div className="relative rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/10 p-8 shadow-2xl">
-                  <div className="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
-                    <span className="text-white text-2xl font-bold">5.0</span>
-                  </div>
-                  <Star className="w-8 h-8 text-amber-400 fill-amber-400 mb-4" />
-                  <p className="text-white/80 text-lg leading-relaxed">
-                    "Лучшая академия английского в Казахстане! Готовился к IELTS, результат — 7.5 за 3 месяца."
-                  </p>
-                  <div className="flex items-center gap-3 mt-6">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold">
-                      АК
+                    <div className="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-2xl shadow-emerald-500/30">
+                      <span className="text-white text-2xl font-bold">—</span>
                     </div>
-                    <div>
-                      <p className="text-white font-semibold">Азамат К.</p>
-                      <p className="text-white/40 text-sm">IELTS 7.5</p>
-                    </div>
-                  </div>
-                </div>
-                {/* Floating stat card */}
-                <div className="absolute -bottom-6 -left-6 rounded-2xl bg-white/5 backdrop-blur-2xl border border-white/10 px-5 py-4 shadow-2xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
-                      <Users className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-white font-bold text-lg">500+</div>
-                      <div className="text-white/40 text-xs">довольных учеников</div>
+                    <Star className="w-8 h-8 text-amber-400 fill-amber-400 mb-4" />
+                    <p className="text-white/80 text-lg leading-relaxed">
+                      "—"
+                    </p>
+                    <div className="flex items-center gap-3 mt-6">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold">
+                        —
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold">—</p>
+                        <p className="text-white/40 text-sm">—</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  {/* Floating stat card */}
+                  <div className="absolute -bottom-6 -left-6 rounded-2xl bg-white/5 backdrop-blur-2xl border border-white/10 px-5 py-4 shadow-2xl">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+                        <Users className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-white font-bold text-lg">—</div>
+                        <div className="text-white/40 text-xs">довольных учеников</div>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </motion.div>
           </div>

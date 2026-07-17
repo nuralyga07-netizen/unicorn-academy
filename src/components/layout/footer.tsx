@@ -31,9 +31,9 @@ const footerLinks = {
 
 const socialLinks = [
   { label: 'Telegram', href: 'https://t.me/Nu_wwx', icon: Send },
-  { label: 'WhatsApp', href: 'https://wa.me/77000000000', icon: MessageCircle },
+  { label: 'WhatsApp', href: '#', icon: MessageCircle },
   { label: 'Instagram', href: '#', icon: Globe },
-  { label: 'Email', href: 'mailto:hello@unicorn-academy.kz', icon: Mail },
+  { label: 'Email', href: '#', icon: Mail },
 ];
 
 export function Footer() {
@@ -73,21 +73,11 @@ export function Footer() {
             <div className="space-y-2.5 text-sm text-gray-500 dark:text-gray-400">
               <div className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-indigo-500 shrink-0" />
-                <a
-                  href="mailto:hello@unicornacademy.com"
-                  className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                >
-                  hello@unicornacademy.com
-                </a>
+                <span className="text-gray-400">—</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-indigo-500 shrink-0" />
-                <a
-                  href="tel:+78001234567"
-                  className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                >
-                  8 (800) 123-45-67
-                </a>
+                <span className="text-gray-400">—</span>
               </div>
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-indigo-500 shrink-0 mt-0.5" />
